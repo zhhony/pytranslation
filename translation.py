@@ -1,4 +1,10 @@
-def translationBaidu(src: str, appid, keys,  fr='en', to='zh') -> str:
+import random
+import hashlib
+import json
+import requests
+
+
+def translationBaidu(src: str, appid: str, keys: str,  fr: str = 'en', to: str = 'zh') -> str:
     '''
     translationBaidu(翻译内容，源语种=en，目标语种=zh) \n
     为保证翻译质量，请将单次请求长度控制在 6000 bytes以内（汉字约为输入参数 2000 个）\n
@@ -15,18 +21,18 @@ def translationBaidu(src: str, appid, keys,  fr='en', to='zh') -> str:
     斯洛文尼亚语	slo	        瑞典语	        swe	        匈牙利语	    hu\n
     繁体中文	    cht	        越南语	        vie	 	 \n
     '''
-    import random
-    import hashlib
-    import json
-    import requests
+
     url_baidu = 'http://api.fanyi.baidu.com/api/trans/vip/translate?'
+
     salt = random.randint(1000000000, 9999999999)
     sign_s = appid + str(src) + str(salt) + keys
     ha = hashlib.md5()
     ha.update(sign_s.encode('utf8'))
     sign = ha.hexdigest()
+
     url = url_baidu + 'q=' + str(src) + '&from=' + fr + '&to=' + to + '&appid=' + \
         appid + '&salt=' + str(salt) + '&sign=' + sign
+
     response = requests.request("get", url)
     cont = response.text.encode('utf-8')
     cont = json.loads(cont)
