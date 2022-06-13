@@ -7,7 +7,7 @@ from time import sleep
 
 def TranslationBaidu(src: str, appid: str, keys: str,  fr: str = 'en', to: str = 'zh') -> str:
     '''
-    translationBaidu(翻译内容，源语种=en，目标语种=zh) \n
+    translationBaidu(翻译内容，appid，keys，源语种=en，目标语种=zh) \n
     为保证翻译质量，请将单次请求长度控制在 6000 bytes以内（汉字约为输入参数 2000 个）\n
     语种列表：\n
     名称	        代码	    名称	        代码	    名称	        代码\n
