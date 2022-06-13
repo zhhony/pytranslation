@@ -2,6 +2,7 @@ import random
 import hashlib
 import json
 import requests
+from time import sleep
 
 
 def translationBaidu(src: str, appid: str, keys: str,  fr: str = 'en', to: str = 'zh') -> str:
@@ -36,5 +37,7 @@ def translationBaidu(src: str, appid: str, keys: str,  fr: str = 'en', to: str =
     response = requests.request("get", url)
     cont = response.text.encode('utf-8')
     cont = json.loads(cont)
+
+    sleep(1)
 
     return cont['trans_result'][0]['dst']
