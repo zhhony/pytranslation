@@ -1,2 +1,2 @@
 from . import translation
-from translation import * 
+from . translation import * 
