@@ -27,20 +27,20 @@ def TranslationBaidu(src: str,  fr: str = 'en', to: str = 'zh') -> str:
     繁体中文	    cht	        越南语	        vie	 	 \n
     '''
 
-    url_baidu = config.getHttp
+    urlBaidu = config.getHttp
     appid = config.getAppid
     keys = config.getKeys
 
     salt = random.randint(1000000000, 9999999999)
-    sign_s = appid + str(src) + str(salt) + keys
+    signs = appid + str(src) + str(salt) + keys
     ha = hashlib.md5()
-    ha.update(sign_s.encode('utf8'))
+    ha.update(signs.encode('utf8'))
     sign = ha.hexdigest()
 
-    url = url_baidu + 'q=' + str(src) + '&from=' + fr + '&to=' + to + '&appid=' + \
+    https = urlBaidu + 'q=' + str(src) + '&from=' + fr + '&to=' + to + '&appid=' + \
         appid + '&salt=' + str(salt) + '&sign=' + sign
 
-    response = requests.request("get", url)
+    response = requests.request("get", https)
     cont = response.text.encode('utf-8')
     cont = json.loads(cont)
 
