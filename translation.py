@@ -4,8 +4,12 @@ import json
 import requests
 from time import sleep
 
+from modules.pyconfig import Config
+from .modules import *
 
-def TranslationBaidu(src: str, appid: str, keys: str,  fr: str = 'en', to: str = 'zh') -> str:
+config = Config("D:\\WorkData\\pytranslation\\config.json")
+
+def TranslationBaidu(src: str,  fr: str = 'en', to: str = 'zh') -> str:
     '''
     translationBaidu(翻译内容，appid，keys，源语种=en，目标语种=zh) \n
     为保证翻译质量，请将单次请求长度控制在 6000 bytes以内（汉字约为输入参数 2000 个）\n
@@ -23,7 +27,9 @@ def TranslationBaidu(src: str, appid: str, keys: str,  fr: str = 'en', to: str =
     繁体中文	    cht	        越南语	        vie	 	 \n
     '''
 
-    url_baidu = 'http://api.fanyi.baidu.com/api/trans/vip/translate?'
+    url_baidu = config.getHttp
+    appid = config.getAppid
+    keys = config.getKeys
 
     salt = random.randint(1000000000, 9999999999)
     sign_s = appid + str(src) + str(salt) + keys
