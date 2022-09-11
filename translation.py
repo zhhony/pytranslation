@@ -9,9 +9,9 @@ from . modules import *
 config = Config("D:\\WorkData\\pytranslation\\config.json")
 
 
-def TranslationBaidu(src: str,  fr: str = 'en', to: str = 'zh') -> str:
+def TranslationBaidu(src: str,  fr: str = 'en', to: str = 'zh', flag: int = 0) -> str:
     '''
-    translationBaidu(翻译内容，appid，keys，源语种=en，目标语种=zh) \n
+    translationBaidu(翻译内容，appid，keys，源语种=en，目标语种=zh，flag<>0时会额外输出内置参数) \n
     为保证翻译质量，请将单次请求长度控制在 6000 bytes以内（汉字约为输入参数 2000 个）\n
     语种列表：\n
     名称	        代码	    名称	        代码	    名称	        代码\n
@@ -46,4 +46,7 @@ def TranslationBaidu(src: str,  fr: str = 'en', to: str = 'zh') -> str:
 
     sleep(1)
 
-    return cont['trans_result'][0]['dst']
+    if flag != 0:
+        return [cont['trans_result'][0]['dst'], 'appid = ' + str(appid), 'salt = ' + str(salt), 'sign = ' + str(sign), 'https = ' + https]
+    else:
+        return cont['trans_result'][0]['dst']
