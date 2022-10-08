@@ -8,7 +8,6 @@ class Config:
         self.__appid = CONFIG['appid']
         self.__keys = CONFIG['keys']
         self.__http = CONFIG['http']
-        
 
     @property
     def getAppid(self) -> str:
